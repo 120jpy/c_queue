@@ -27,4 +27,4 @@ typedef struct Queue_t{
 
 void vQueueInit(Queue_t* pxQueue);
 bool bQueuePush(Queue_t* pxQueue,uint8_t* pucData,uint32_t ulSize);
-bool bQueuePop(Queue_t* pxQueue,uint8_t* pucData);
+bool bQueuePop(Queue_t* pxQueue,uint8_t* pucData,uint32_t* pulSize);
