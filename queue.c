@@ -67,10 +67,13 @@ bool bQueuePush(Queue_t* pxQueue,uint8_t* pucData,uint32_t ulSize){
 
 }
 
-bool bQueuePop(Queue_t* pxQueue,uint8_t* pucData){
+bool bQueuePop(Queue_t* pxQueue,uint8_t* pucData,uint32_t* pulSize){
     uint32_t ulSize = *(uint32_t*)&pxQueue->aucData[pxQueue->xSetting.ulReadIndex];
     uint32_t ulNext = ulNextIndex(pxQueue->xSetting.ulReadIndex,ulSize);
     uint32_t tmp = 0;
+    if(*pulSize < ulSize){
+        return false;
+    }
     vQueueLock(pxQueue);
     if(ulNext < pxQueue->xSetting.ulReadIndex){
         pxQueue->xSetting.ucOFFlag = 0;
@@ -80,6 +83,7 @@ bool bQueuePop(Queue_t* pxQueue,uint8_t* pucData){
         return false;
     }
     
+    *pulSize = ulSize;
     pxQueue->xSetting.ulReadIndex = (pxQueue->xSetting.ulReadIndex + eQueueBlockSize) & eQueueLengthMask;
 
     tmp = (ulSize >> 2);
