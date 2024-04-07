@@ -4,11 +4,9 @@
 #include <stdbool.h>
 
 typedef enum eQueueSetting{
-
     eQueueBlockSize = 4,
     eQueueLength = (8 * 1024),
-    eQueueLengthMask = eQueueLength - 1,
-    
+    eQueueLengthMask = eQueueLength - 1,   
 }eQueueSetting;
 
 typedef uint32_t QueueMutex_t;
