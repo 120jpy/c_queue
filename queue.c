@@ -146,7 +146,7 @@ uint32_t ulNextIndex(uint32_t ulIndex,uint32_t ulSize){
     }else{
         ulNext = (ulSize & ~(0b11)) + eQueueBlockSize;
     }
-    ulNext = (ulIndex + ulSize) & eQueueLengthMask;
+    ulNext = (ulIndex + ulNext) & eQueueLengthMask;
     return ulNext;
 }
 
